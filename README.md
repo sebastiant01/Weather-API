@@ -3,21 +3,6 @@
 A RESTful web application built with **Java Spring Boot** that fetches real-time weather data from the [Visual Crossing Weather API](https://www.visualcrossing.com/). Users can retrieve weather information for any city by providing the city name directly in the URL path.
 
 ---
-
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Configuration](#configuration)
-    - [Running the Application](#running-the-application)
-- [API Usage](#api-usage)
-- [Error Handling](#error-handling)
-
----
-
 ## ✨ Features
 
 - 🔍 Fetch current weather data by city name via a simple URL path
