@@ -10,7 +10,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpClientErrorException.NotFound.class)
     public ResponseEntity<ErrorDetails> handleCityNotFound(HttpClientErrorException.NotFound exception) {
         ErrorDetails messageError = new ErrorDetails("Error: City not found.",
-                "The city's code doesn't exist or was not found.");
+                "The city's name doesn't exist or was not found.");
         return new ResponseEntity<>(messageError, HttpStatus.NOT_FOUND);
     }
 
