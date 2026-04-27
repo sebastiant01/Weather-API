@@ -66,11 +66,12 @@ weather.app/
 cp src/main/resources/application.properties.example src/main/resources/application.properties
 ```
 
-2. Open `application.properties` and fill in your API key:
+2. Open `application.properties` and fill in your API key and server configuration:
 
 ```properties
 weather.api.key=YOUR_VISUAL_CROSSING_API_KEY
-weather.api.base-url=https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline
+weather.api.base-url=https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/
+server.servlet.context-path=/weather-app/api/v1
 ```
 
 > ⚠️ `application.properties` is listed in `.gitignore` to keep your API key private. Never commit it to version control.
@@ -93,16 +94,22 @@ The application will start on `http://localhost:8080` by default.
 
 ## 📡 API Usage
 
+The application context path is set to `/weather-app/api/v1` in `application.properties`:
+
+```properties
+server.servlet.context-path=/weather-app/api/v1
+```
+
 ### Get weather by city
 
 ```
-GET /api/v1/weather/{city}
+GET /weather-app/api/v1/weather/{city}
 ```
 
 **Example:**
 
 ```bash
-curl http://localhost:8080/weather/London
+curl http://localhost:8080/weather-app/api/v1/weather/London
 ```
 
 **Response:**
@@ -117,8 +124,6 @@ curl http://localhost:8080/weather/London
 }
 ```
 
-> Response fields may vary depending on the data returned by the Visual Crossing API.
-
 ---
 
 ## ⚠️ Error Handling
@@ -130,10 +135,11 @@ The application includes a `GlobalExceptionHandler` that returns structured erro
   "timestamp": "2025-04-25T10:30:00",
   "status": 404,
   "error": "City not found",
-  "message": "The city's name doesn't exist or was not found."
+  "message": "No weather data available for the specified city."
 }
 ```
 
+---
 ## 📄 License
 
 This project is for educational purposes. Feel free to use it as a reference or starting point for your own Spring Boot projects.

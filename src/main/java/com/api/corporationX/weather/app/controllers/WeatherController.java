@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * REST controller that exposes the weather endpoints for the Weather App API.
  *
- * <p>All endpoints are prefixed with {@code /api/v1/weather}. Incoming requests
- * are delegated to {@link WeatherService}, which handles the communication
- * with the external Visual Crossing Weather API.</p>
+ * <p>Incoming requests are delegated to {@link WeatherService}, which handles
+ * the communication with the external Visual Crossing Weather API.</p>
  *
- * <p>Base URL: {@code /api/v1/weather}</p>
+ * <p>The application context path is configured in {@code application.properties} as
+ * {@code server.servlet.context-path=/weather-app/api/v1}, so the full base URL
+ * for all endpoints in this controller is:</p>
+ * <pre>{@code /weather-app/api/v1/weather}</pre>
  */
 @RestController
-@RequestMapping("/api/v1/weather")
+@RequestMapping("/weather")
 public class WeatherController {
 
     /**
@@ -36,10 +38,10 @@ public class WeatherController {
      * to the {@link WeatherService}. On success, returns a {@code 200 OK} response
      * with the weather data as JSON.</p>
      *
-     * <p><b>Endpoint:</b> {@code GET /api/v1/weather/{city}}</p>
+     * <p><b>Endpoint:</b> {@code GET /weather-app/api/v1/weather/{city}}</p>
      *
      * <p><b>Example request:</b></p>
-     * <pre>{@code GET /api/v1/weather/London}</pre>
+     * <pre>{@code GET /weather-app/api/v1/weather/London}</pre>
      *
      * <p><b>Example response:</b></p>
      * <pre>{@code
