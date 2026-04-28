@@ -7,14 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Service layer responsible for communicating with the Visual Crossing Weather API.
+ * Concrete implementation of {@link IntWeatherService} responsible for communicating
+ * with the Visual Crossing Weather API.
  *
  * <p>This class handles the construction of the external API request URL and delegates
  * the HTTP call to {@link RestTemplate}. The API key and base URL are injected from
  * the application configuration, keeping credentials out of the source code.</p>
  *
- * <p>The response is automatically deserialized into a {@link WeatherResponse} object
- * by Jackson.</p>
+ * <p>The response JSON is automatically deserialized into a {@link WeatherResponse}
+ * object by Jackson.</p>
  */
 @Service
 public class WeatherService implements IntWeatherService {
@@ -41,19 +42,20 @@ public class WeatherService implements IntWeatherService {
     private String BASE_URL;
 
     /**
-     * Fetches current weather data for the specified city from the Visual Crossing API.
+     * {@inheritDoc}
      *
-     * <p>Builds the full request URL using the base URL, city name, and query parameters,
-     * then performs an HTTP GET request. The JSON response is deserialized directly
-     * into a {@link WeatherResponse} object.</p>
+     * <p>Builds the full request URL by combining the base URL, the city name, and
+     * the following query parameters:</p>
+     * <ul>
+     *   <li>{@code unitGroup=metric} — returns temperature in Celsius</li>
+     *   <li>{@code key} — the Visual Crossing API key</li>
+     *   <li>{@code contentType=json} — requests a JSON response</li>
+     * </ul>
      *
-     * <p>The request uses metric units ({@code unitGroup=metric}) so temperature
-     * is returned in Celsius.</p>
-     *
-     * @param city the name of the city to query (e.g., {@code "London"})
-     * @return a {@link WeatherResponse} containing the city's current weather data
-     * @throws org.springframework.web.client.HttpClientErrorException.NotFound if the city is not found (HTTP 404)
-     * @throws org.springframework.web.client.HttpClientErrorException.Unauthorized if the API key is invalid (HTTP 401)
+     * @throws org.springframework.web.client.HttpClientErrorException.NotFound
+     *         if the city is not found by the external API (HTTP 404)
+     * @throws org.springframework.web.client.HttpClientErrorException.Unauthorized
+     *         if the configured API key is invalid (HTTP 401)
      */
     @Override
     public WeatherResponse getWeather(String city) {
