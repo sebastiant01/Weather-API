@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
  * by Jackson.</p>
  */
 @Service
-public class WeatherService {
+public class WeatherService implements IntWeatherService {
 
     /**
      * Spring-managed HTTP client used to perform requests to the external Weather API.
@@ -55,6 +55,7 @@ public class WeatherService {
      * @throws org.springframework.web.client.HttpClientErrorException.NotFound if the city is not found (HTTP 404)
      * @throws org.springframework.web.client.HttpClientErrorException.Unauthorized if the API key is invalid (HTTP 401)
      */
+    @Override
     public WeatherResponse getWeather(String city) {
         String url = String.format("%s%s?unitGroup=metric&key=%s&contentType=json",
                 BASE_URL, city, API_KEY);

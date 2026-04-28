@@ -1,6 +1,7 @@
 package com.api.corporationX.weather.app.controllers;
 
 import com.api.corporationX.weather.app.models.WeatherResponse;
+import com.api.corporationX.weather.app.services.IntWeatherService;
 import com.api.corporationX.weather.app.services.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class WeatherController {
      * Injected automatically by Spring's dependency injection container.
      */
     @Autowired
-    private WeatherService weatherService;
+    private IntWeatherService weatherService;
 
     /**
      * Retrieves the current weather data for the specified city.
